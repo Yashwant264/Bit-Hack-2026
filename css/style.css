@@ -2053,3 +2053,14 @@ section {
     margin-bottom: 20px; /* Space between club name and BIT HACK */
     /* Remove any 'position: absolute' if it was there before */
 }
+.event-badge {
+  display: inline-block;
+  padding: 8px 18px;
+  margin-bottom: 20px;
+  border-radius: 50px;
+  background: rgba(0, 255, 150, 0.1);
+  border: 1px solid rgba(0, 255, 150, 0.3);
+  color: #7cf9c8;
+  font-size: 14px;
+  text-align: center;
+}
