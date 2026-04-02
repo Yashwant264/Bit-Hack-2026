@@ -437,7 +437,7 @@ body:not(:hover) .cursor-follower { opacity: 0; }
 }
 
 .hero-title {
-  font-family: var(--font-display);
+  font-family: inherit;
   font-size: clamp(40px, 8vw, 120px);
   font-weight: 800;
   line-height: 0.95;
@@ -461,10 +461,10 @@ body:not(:hover) .cursor-follower { opacity: 0; }
   background-clip: text;
 }
 
-.title-year {
-  font-size: clamp(2.5rem, 8vw, 6rem);
-  color: var(--text-2);
-  font-weight: 700;
+.year {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
 }
 
 .hero-tagline {
@@ -1994,6 +1994,7 @@ section {
   transform: none !important;
 }
 .hero h1 {
+  font-family: inherit; 
   display: block;
   text-align: center !important;
   margin-left: auto !important;
@@ -2018,8 +2019,25 @@ section {
   font-size: 40px;
   margin-top: 10px;
 }
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .hero h1 {
-  margin-left: 0 !important;
-  transform: none !important;
-  text-align: center !important;
+  position: relative;
+  left: 0;
+  transform: none;
+}
+.hero h1 {
+  max-width: 100%;
+  overflow: visible;
+  white-space: nowrap;
 }
