@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BitHack '26 — Build. Break. Breakthrough.</title>
+  <meta name="description" content="VIT Bhopal's most elite 36-hour hackathon. Organized by Bit by Bit Club. April 15-16, 2026." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<script src="js/script.js"></script>
+<body>
+
+<!-- NOISE OVERLAY -->
+<div class="noise-overlay"></div>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <span class="logo-mark">B²</span>
+      <span class="logo-text">BitHack <em>'26</em></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#stages">Stages</a></li>
+      <li><a href="#domains">Domains</a></li>
+      <li><a href="#prizes">Prizes</a></li>
+      <li><a href="#register">Register</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="admin.html" class="nav-admin">Admin</a>
+      <a href="#register" class="btn-nav-cta">Register Now</a>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#about" class="mm-link">About</a></li>
+    <li><a href="#stages" class="mm-link">Stages</a></li>
+    <li><a href="#domains" class="mm-link">Domains</a></li>
+    <li><a href="#prizes" class="mm-link">Prizes</a></li>
+    <li><a href="#register" class="mm-link">Register</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-gradient-orb orb-1"></div>
+    <div class="hero-gradient-orb orb-2"></div>
+    <div class="hero-gradient-orb orb-3"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge" data-scroll="fade-up">
+      <span class="badge-dot"></span>
+      Bit by Bit Club · VIT Bhopal University
+    </div>
+
+    <h1 class="hero-title" data-scroll="fade-up" data-delay="100">
+      <span class="title-line">
+        <span class="title-word">BIT</span>
+        <span class="title-word accent">HACK</span>
+      </span>
+      <span class="title-line title-year">'26</span>
+    </h1>
+
+    <p class="hero-tagline" data-scroll="fade-up" data-delay="200">
+      36 hours. Infinite possibilities. One platform where <br class="br-desk" />
+      <em>bold ideas become real products.</em>
+    </p>
+
+    <div class="hero-meta" data-scroll="fade-up" data-delay="300">
+      <div class="meta-item">
+        <span class="meta-label">Date</span>
+        <span class="meta-value">April 15-16, 2026</span>
+      </div>
+      <div class="meta-divider"></div>
+      <div class="meta-item">
+        <span class="meta-label">Duration</span>
+        <span class="meta-value">36 Hours</span>
+      </div>
+      <div class="meta-divider"></div>
+      <div class="meta-item">
+        <span class="meta-label">Venue</span>
+        <span class="meta-value">VIT Bhopal</span>
+      </div>
+      <div class="meta-divider"></div>
+      <div class="meta-item">
+        <span class="meta-label">Team Size</span>
+        <span class="meta-value">2–5 Members</span>
+      </div>
+    </div>
+
+    <div class="hero-cta" data-scroll="fade-up" data-delay="400">
+      <a href="#register" class="btn-primary">
+        <span>Register Your Team</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#about" class="btn-ghost">Learn More</a>
+    </div>
+  </div>
+
+  <!-- COUNTDOWN -->
+  <div class="countdown-container" data-scroll="fade-up" data-delay="500">
+    <p class="countdown-label">Registration closes in</p>
+    <div class="countdown" id="countdown">
+      <div class="countdown-unit">
+        <span class="countdown-num" id="days">00</span>
+        <span class="countdown-name">Days</span>
+      </div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit">
+        <span class="countdown-num" id="hours">00</span>
+        <span class="countdown-name">Hours</span>
+      </div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit">
+        <span class="countdown-num" id="minutes">00</span>
+        <span class="countdown-name">Minutes</span>
+      </div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit">
+        <span class="countdown-num" id="seconds">00</span>
+        <span class="countdown-name">Seconds</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint">
+    <span>Scroll to explore</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<section class="stats-strip">
+  <div class="strip-inner">
+    <div class="stat-item">
+      <span class="stat-num" data-count="500">0</span><span class="stat-unit">+</span>
+      <span class="stat-label">Expected Participants</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">36</span><span class="stat-unit">H</span>
+      <span class="stat-label">Non-Stop Hacking</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num" data-count="8">0</span><span class="stat-unit">+</span>
+      <span class="stat-label">Problem Domains</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">₹50K</span><span class="stat-unit">+</span>
+      <span class="stat-label">Prize Pool</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section about-section" id="about">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">// About the Hackathon</span>
+      <h2 class="section-title" data-scroll="split">What is BitHack?</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text" data-scroll="fade-up">
+        <p>BitHack '26 is a <strong>36-hour innovation marathon</strong> organized by the <strong>Bit by Bit Club</strong>, the premier technical club of VIT Bhopal University. It's a platform where curious minds transform ideas into impactful solutions.</p>
+        <p>Whether you're a coder, designer, data scientist, or a problem-solver, BitHack is your arena to collaborate, create, and compete with the brightest tech minds on campus.</p>
+        <p>Teams will go through <strong>3 structured stages</strong> — from ideation to final demo — tackling real-world challenges across multiple high-impact domains.</p>
+        <a href="#register" class="btn-primary" style="margin-top:1.5rem;display:inline-flex;">
+          <span>Join the Movement</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="about-visual" data-scroll="fade-left">
+        <div class="about-card glass-card">
+          <div class="about-card-icon">🎯</div>
+          <h3>Real-World Problems</h3>
+          <p>Work on challenges that matter — from healthcare to fintech, smart cities to sustainability.</p>
+        </div>
+        <div class="about-card glass-card" style="--delay:0.1s">
+          <div class="about-card-icon">🤝</div>
+          <h3>Expert Mentorship</h3>
+          <p>Get guided by industry professionals, faculty mentors, and startup veterans.</p>
+        </div>
+        <div class="about-card glass-card" style="--delay:0.2s">
+          <div class="about-card-icon">🏆</div>
+          <h3>Win & Get Recognized</h3>
+          <p>₹50K+ in prizes, certificates, swag, and a real chance at mentorship opportunities.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI DEMO FEATURE -->
+<section class="section ai-section" id="ai-demo">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">// AI-Powered Feature</span>
+      <h2 class="section-title" data-scroll="split">Idea Validator</h2>
+      <p class="section-sub">Not sure if your hackathon idea is strong enough? Describe it and our AI scorer gives you instant feedback on innovation, feasibility, and impact.</p>
+    </div>
+    <div class="idea-validator glass-card" data-scroll="fade-up">
+      <div class="validator-input-area">
+        <label>Describe your hackathon idea</label>
+        <textarea id="ideaInput" placeholder="E.g. An AI-powered app that helps rural farmers predict crop diseases using smartphone camera and local weather data..." rows="4"></textarea>
+        <div class="validator-meta-row">
+          <select id="domainSelect">
+            <option value="">Select Domain (optional)</option>
+            <option value="AI/ML">AI / ML</option>
+            <option value="Healthcare">Healthcare</option>
+            <option value="Cybersecurity">Cybersecurity</option>
+            <option value="Sustainability">Sustainability</option>
+            <option value="EdTech">EdTech</option>
+            <option value="Smart Cities">Smart Cities</option>
+            <option value="FinTech">FinTech</option>
+            <option value="Open Innovation">Open Innovation</option>
+          </select>
+          <button id="validateBtn" class="btn-primary" onclick="validateIdea()">
+            <span>Analyze Idea</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2l6 6-6 6M2 8h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="validator-result" id="validatorResult" style="display:none">
+        <div class="result-header">
+          <span class="result-title">Analysis Complete</span>
+          <span class="result-badge" id="resultBadge"></span>
+        </div>
+        <div class="score-grid">
+          <div class="score-item">
+            <span class="score-label">Innovation</span>
+            <div class="score-bar-wrap"><div class="score-bar" id="scoreInnovation"></div></div>
+            <span class="score-val" id="scoreInnovationVal"></span>
+          </div>
+          <div class="score-item">
+            <span class="score-label">Feasibility</span>
+            <div class="score-bar-wrap"><div class="score-bar" id="scoreFeasibility"></div></div>
+            <span class="score-val" id="scoreFeasibilityVal"></span>
+          </div>
+          <div class="score-item">
+            <span class="score-label">Impact</span>
+            <div class="score-bar-wrap"><div class="score-bar" id="scoreImpact"></div></div>
+            <span class="score-val" id="scoreImpactVal"></span>
+          </div>
+          <div class="score-item">
+            <span class="score-label">Market Fit</span>
+            <div class="score-bar-wrap"><div class="score-bar" id="scoreMarket"></div></div>
+            <span class="score-val" id="scoreMarketVal"></span>
+          </div>
+        </div>
+        <p class="result-feedback" id="resultFeedback"></p>
+        <div class="result-tags" id="resultTags"></div>
+      </div>
+      <div class="validator-loading" id="validatorLoading" style="display:none">
+        <div class="loading-dots"><span></span><span></span><span></span></div>
+        <p>Analyzing your idea with 12 heuristic signals...</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAGES -->
+<section class="section stages-section" id="stages">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">// Hackathon Journey</span>
+      <h2 class="section-title" data-scroll="split">Three Stages</h2>
+    </div>
+    <div class="stages-timeline">
+      <div class="stage-item" data-scroll="fade-up">
+        <div class="stage-num">01</div>
+        <div class="stage-card glass-card">
+          <div class="stage-icon">💡</div>
+          <div class="stage-info">
+            <span class="stage-tag">Stage 01</span>
+            <h3>IDEATION</h3>
+            <p>Pitch your idea. Articulate the problem, propose your solution, and outline your approach. This is where big thinking begins.</p>
+          </div>
+          <ul class="stage-checklist">
+            <li>Submit a problem statement within your chosen domain</li>
+            <li>Prepare a 2-page concept document (PDF)</li>
+            <li>Clearly define target users and impact</li>
+            <li>Include a basic wireframe or flow diagram</li>
+            <li>Teams evaluated on creativity & feasibility</li>
+            <li><strong>Top 40 teams advance to Stage 2</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="stage-connector"></div>
+
+      <div class="stage-item" data-scroll="fade-up" data-delay="150">
+        <div class="stage-num">02</div>
+        <div class="stage-card glass-card">
+          <div class="stage-icon">🔧</div>
+          <div class="stage-info">
+            <span class="stage-tag">Stage 02</span>
+            <h3>PROTOTYPE</h3>
+            <p>Build it. Code through the night, design the UX, test your logic. Transform your concept into a working prototype.</p>
+          </div>
+          <ul class="stage-checklist">
+            <li>24-hour coding sprint at the venue</li>
+            <li>Working prototype mandatory for evaluation</li>
+            <li>Mentors available for tech and domain guidance</li>
+            <li>Use any stack, framework, or tool of choice</li>
+            <li>Midpoint check-in at 12-hour mark</li>
+            <li><strong>Top 10 teams advance to Final Stage</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="stage-connector"></div>
+
+      <div class="stage-item" data-scroll="fade-up" data-delay="300">
+        <div class="stage-num">03</div>
+        <div class="stage-card glass-card">
+          <div class="stage-icon">🚀</div>
+          <div class="stage-info">
+            <span class="stage-tag">Stage 03</span>
+            <h3>FINAL STAGE</h3>
+            <p>Present to the jury. Demo your product, defend your choices, and show the judges why your solution wins.</p>
+          </div>
+          <ul class="stage-checklist">
+            <li>7-minute live demo presentation</li>
+            <li>3-minute Q&A with expert panel jury</li>
+            <li>Judges evaluate impact, innovation & execution</li>
+            <li>Code quality and documentation are assessed</li>
+            <li>Business viability is a bonus criterion</li>
+            <li><strong>Winners announced at closing ceremony</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOMAINS -->
+<section class="section domains-section" id="domains">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">// Choose Your Arena</span>
+      <h2 class="section-title" data-scroll="split">Problem Domains</h2>
+    </div>
+    <div class="domains-grid">
+      <div class="domain-card glass-card" data-scroll="fade-up" data-delay="0">
+        <div class="domain-emoji">🛡️</div>
+        <div class="domain-tags"><span>Cyber</span><span>Security</span></div>
+        <h3>Cybersecurity</h3>
+        <p>Build a lightweight intrusion detection system for IoT devices in smart homes. Detect anomalies in network traffic and alert users in real-time without cloud connectivity.</p>
+      </div>
+      <div class="domain-card glass-card" data-scroll="fade-up" data-delay="50">
+        <div class="domain-emoji">🏥</div>
+        <div class="domain-tags"><span>Health</span><span>MedTech</span></div>
+        <h3>Healthcare</h3>
+        <p>Design an accessible telehealth platform for rural communities with limited internet access, enabling symptom logging, consultations, and medicine reminders.</p>
+      </div>
+      <div class="domain-card glass-card" data-scroll="fade-up" data-delay="100">
+        <div class="domain-emoji">🤖</div>
+        <div class="domain-tags"><span>AI</span><span>Machine Learning</span></div>
+        <h3>AI / ML</h3>
+        <p>Develop a system that uses machine learning to detect academic plagiarism not just in text but across multimodal content including code, diagrams, and data visualizations.</p>
+      </div>
+      <div class="domain-card glass-card" data-scroll="fade-up" data-delay="150">
+        <div class="domain-emoji">🌿</div>
+        <div class="domain-tags"><span>GreenTech</span><span>Environment</span></div>
+        <h3>Sustainability</h3>
+        <p>Create a smart waste management solution for university campuses. Use sensors and gamification to segregate, track, and reduce solid waste while incentivizing sustainable behavior.</p>
+      </div>
+      <div class="domain-card glass-card" data-scroll="fade-up" data-delay="200">
+        <div class="domain-emoji">📚</div>
+        <div class="domain-tags"><span>Education</span><span>Learning</span></div>
+        <h3>EdTech</h3>
+        <p>Build an adaptive learning platform that personalizes course content based on a student's learning speed, style, and past performance with multilingual support.</p>
+      </div>
+      <div class="domain-card glass-card" data-scroll="fade-up" data-delay="250">
+        <div class="domain-emoji">🏙️</div>
+        <div class="domain-tags"><span>Urban</span><span>Mobility</span></div>
+        <h3>Smart Cities</h3>
+        <p>Design a real-time traffic decongestion system using crowdsourced data and predictive analytics. Dynamically reroute commuters and optimize traffic signal timings.</p>
+      </div>
+      <div class="domain-card glass-card" data-scroll="fade-up" data-delay="300">
+        <div class="domain-emoji">💰</div>
+        <div class="domain-tags"><span>Finance</span><span>Tech</span></div>
+        <h3>FinTech</h3>
+        <p>Build a micro-lending and financial literacy app for college students with no credit history, using alternative data to assess credit-worthiness responsibly.</p>
+      </div>
+      <div class="domain-card glass-card domain-open" data-scroll="fade-up" data-delay="350">
+        <div class="domain-emoji">🧠</div>
+        <div class="domain-tags"><span>Open</span><span>Freestyle</span></div>
+        <h3>Open Innovation</h3>
+        <p>Got an idea that doesn't fit any domain? Open track is for teams with a unique, high-impact idea solving any real-world problem. Think bold, build bolder.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIZES -->
+<section class="section prizes-section" id="prizes">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">// Win Big</span>
+      <h2 class="section-title" data-scroll="split">Prize Pool</h2>
+    </div>
+    <div class="prizes-grid">
+      <div class="prize-card prize-runner glass-card" data-scroll="fade-up" data-delay="0">
+        <div class="prize-rank">🥈 Runner Up</div>
+        <div class="prize-trophy">🏆</div>
+        <div class="prize-amount">₹8,000</div>
+        <div class="prize-note">Cash prize per team</div>
+        <ul class="prize-perks">
+          <li>Silver Trophy</li>
+          <li>Goodies Pack</li>
+          <li>Merit Certificates</li>
+          <li>Swag Kit</li>
+        </ul>
+      </div>
+      <div class="prize-card prize-champion glass-card" data-scroll="fade-up" data-delay="100">
+        <div class="prize-champion-badge">CHAMPION</div>
+        <div class="prize-rank">🥇 Champion</div>
+        <div class="prize-trophy">🏆</div>
+        <div class="prize-amount">₹15,000</div>
+        <div class="prize-note">Cash prize per team</div>
+        <ul class="prize-perks">
+          <li>Gold Trophy</li>
+          <li>Premium Goodies Pack</li>
+          <li>Winner Certificates</li>
+          <li>Exclusive Swag Kit</li>
+          <li><strong>Mentorship Opportunity</strong></li>
+        </ul>
+      </div>
+      <div class="prize-card prize-second glass-card" data-scroll="fade-up" data-delay="200">
+        <div class="prize-rank">🥉 2nd Runner Up</div>
+        <div class="prize-trophy">🏆</div>
+        <div class="prize-amount">₹5,000</div>
+        <div class="prize-note">Cash prize per team</div>
+        <ul class="prize-perks">
+          <li>Bronze Trophy</li>
+          <li>Goodies Pack</li>
+          <li>Merit Certificates</li>
+          <li>Swag Kit</li>
+        </ul>
+      </div>
+    </div>
+    <div class="prizes-extras" data-scroll="fade-up">
+      <div class="extra-item">🎓 <strong>Participation Certificates</strong> for ALL participants who complete the hackathon.</div>
+      <div class="extra-item">🏅 <strong>Best Domain Winner</strong> — Special Goodies per domain</div>
+      <div class="extra-item">⭐ <strong>Best UI/UX</strong> — Special Mention Certificate</div>
+    </div>
+  </div>
+</section>
+
+<!-- RULES -->
+<section class="section rules-section" id="rules">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">// Play Fair, Win Fair</span>
+      <h2 class="section-title" data-scroll="split">Rules & Guidelines</h2>
+    </div>
+    <div class="rules-grid">
+      <div class="rules-block glass-card" data-scroll="fade-up">
+        <h3><span class="rules-icon">⚙️</span> Team Rules</h3>
+        <ol class="rules-list">
+          <li>Teams must consist of 2 to 5 members only.</li>
+          <li>All team members must be registered students of VIT Bhopal.</li>
+          <li>Each participant can be part of only one team.</li>
+          <li>Team leader must coordinate with organizers for all communications.</li>
+          <li>Team changes are not permitted after registration closes.</li>
+          <li>Registration fee is <strong>₹150 per member</strong> (non-refundable).</li>
+        </ol>
+      </div>
+      <div class="rules-block glass-card" data-scroll="fade-up" data-delay="100">
+        <h3><span class="rules-icon">💻</span> Technical Rules</h3>
+        <ol class="rules-list">
+          <li>All code must be written during the hackathon event window.</li>
+          <li>Open-source libraries and public APIs are allowed.</li>
+          <li>Pre-existing projects or templates are strictly prohibited.</li>
+          <li>Teams must push code to GitHub — final commit timestamps will be verified.</li>
+          <li>Plagiarism or code copying from other teams results in disqualification.</li>
+          <li>AI tools may be used for assistance but not to generate the entire solution.</li>
+        </ol>
+      </div>
+      <div class="rules-block glass-card" data-scroll="fade-up" data-delay="200">
+        <h3><span class="rules-icon">📋</span> Submission Rules</h3>
+        <ol class="rules-list">
+          <li>Teams must submit a working GitHub repository link.</li>
+          <li>A README file with setup instructions is mandatory.</li>
+          <li>A demo video (max 3 minutes) must be submitted alongside code.</li>
+          <li>Late submissions will not be accepted under any circumstances.</li>
+          <li>Judging: Innovation (30%), Execution (30%), Impact (25%), Presentation (15%).</li>
+        </ol>
+      </div>
+      <div class="rules-block glass-card" data-scroll="fade-up" data-delay="300">
+        <h3><span class="rules-icon">🏛️</span> Code of Conduct</h3>
+        <ol class="rules-list">
+          <li>Participants must maintain respectful behavior towards all attendees.</li>
+          <li>Harassment, discrimination, or misconduct will result in immediate disqualification.</li>
+          <li>Organizers' decisions are final and binding in all matters.</li>
+          <li>Participants are responsible for their own equipment and data.</li>
+          <li>VIT Bhopal campus rules and regulations apply throughout.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTRATION FEE -->
+<section class="section fee-section">
+  <div class="container">
+    <div class="fee-card glass-card" data-scroll="fade-up">
+      <div class="fee-left">
+        <div class="fee-amount">₹150</div>
+        <div class="fee-note">per member · non-refundable</div>
+        <p class="fee-breakdown">A team of 5 pays ₹750 total &nbsp;|&nbsp; A team of 2 pays ₹300 total</p>
+      </div>
+      <div class="fee-right">
+        <p class="fee-includes-label">Registration fee includes:</p>
+        <ul class="fee-includes">
+          <li>✓ Event access</li>
+          <li>✓ Meals & refreshments</li>
+          <li>✓ BitHack T-shirt</li>
+          <li>✓ Participation certificate</li>
+          <li>✓ Networking sessions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTRATION FORM -->
+<section class="section register-section" id="register">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">// Join the Hackathon</span>
+      <h2 class="section-title" data-scroll="split">Register Your Team</h2>
+      <p class="section-sub">Fill in your team details below. All fields are required. Slots are limited — register before they run out!</p>
+    </div>
+
+    <div class="register-form-wrap glass-card" data-scroll="fade-up">
+      <form id="registrationForm" novalidate>
+        <!-- TEAM INFO -->
+        <div class="form-section-title">
+          <span class="form-section-num">01</span>
+          Team Information
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="teamName">Team Name <span class="req">*</span></label>
+            <input type="text" id="teamName" placeholder="Enter your team name" required />
+            <span class="form-error" id="err-teamName"></span>
+          </div>
+          <div class="form-group">
+            <label for="collegeName">College Name <span class="req">*</span></label>
+            <input type="text" id="collegeName" placeholder="VIT Bhopal University" required />
+            <span class="form-error" id="err-collegeName"></span>
+          </div>
+          <div class="form-group">
+            <label for="collegeEmail">College Email <span class="req">*</span></label>
+            <input type="email" id="collegeEmail" placeholder="yourname@vitbhopal.ac.in" required />
+            <span class="form-error" id="err-collegeEmail"></span>
+          </div>
+          <div class="form-group">
+            <label for="contact">Contact Number <span class="req">*</span></label>
+            <input type="tel" id="contact" placeholder="+91 XXXXX XXXXX" required />
+            <span class="form-error" id="err-contact"></span>
+          </div>
+          <div class="form-group">
+            <label for="teamSize">Team Size <span class="req">*</span></label>
+            <select id="teamSize" required>
+              <option value="">Select team size</option>
+              <option value="2">2 Members</option>
+              <option value="3">3 Members</option>
+              <option value="4">4 Members</option>
+              <option value="5">5 Members</option>
+            </select>
+            <span class="form-error" id="err-teamSize"></span>
+          </div>
+          <div class="form-group">
+            <label for="domain">Problem Domain <span class="req">*</span></label>
+            <select id="domain" required>
+              <option value="">Select your domain</option>
+              <option value="Cybersecurity">Cybersecurity</option>
+              <option value="Healthcare">Healthcare</option>
+              <option value="AI/ML">AI / ML</option>
+              <option value="Sustainability">Sustainability</option>
+              <option value="EdTech">EdTech</option>
+              <option value="Smart Cities">Smart Cities</option>
+              <option value="FinTech">FinTech</option>
+              <option value="Open Innovation">Open Innovation</option>
+            </select>
+            <span class="form-error" id="err-domain"></span>
+          </div>
+        </div>
+
+        <!-- MEMBER FIELDS -->
+        <div class="form-section-title" style="margin-top:2rem">
+          <span class="form-section-num">02</span>
+          Team Members
+        </div>
+        <div id="membersContainer"></div>
+
+        <!-- TERMS -->
+        <div class="form-group form-checkbox" style="margin-top:1.5rem">
+          <label class="checkbox-label">
+            <input type="checkbox" id="termsCheck" required />
+            <span class="checkbox-custom"></span>
+            <span>I confirm that all team members are registered VIT Bhopal students and agree to the <a href="#rules">Rules & Guidelines</a> of BitHack '26.</span>
+          </label>
+          <span class="form-error" id="err-terms"></span>
+        </div>
+
+        <!-- SUBMIT -->
+        <div class="form-submit-row">
+          <button type="submit" class="btn-primary btn-submit" id="submitBtn">
+            <span id="submitBtnText">Submit Registration</span>
+            <div class="btn-spinner" id="btnSpinner" style="display:none"></div>
+          </button>
+          <p class="form-note">Your data is securely stored. No spam, ever.</p>
+        </div>
+      </form>
+
+      <!-- SUCCESS -->
+      <div class="form-success" id="formSuccess" style="display:none">
+        <div class="success-icon">✅</div>
+        <h3>Registration Successful!</h3>
+        <p>Your team has been registered for BitHack '26. We'll reach out via the provided email with further details. Keep an eye on your inbox!</p>
+        <button class="btn-ghost" onclick="resetForm()">Register Another Team</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-section" id="contact">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">// Get in Touch</span>
+      <h2 class="section-title" data-scroll="split">Contact Us</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card glass-card" data-scroll="fade-up">
+        <div class="contact-avatar">AB</div>
+        <div class="contact-info">
+          <h4>ABC</h4>
+          <span>Event Coordinator · Bit by Bit Club</span>
+          <a href="tel:+919876500000">📞 +91 98765 XXXXX</a>
+          <a href="mailto:abc@vitbhopal.ac.in">✉️ abc@vitbhopal.ac.in</a>
+        </div>
+      </div>
+      <div class="contact-card glass-card" data-scroll="fade-up" data-delay="100">
+        <div class="contact-avatar">XY</div>
+        <div class="contact-info">
+          <h4>XYZ</h4>
+          <span>Technical Lead · Bit by Bit Club</span>
+          <a href="tel:+919123400000">📞 +91 91234 XXXXX</a>
+          <a href="mailto:xyz@vitbhopal.ac.in">✉️ xyz@vitbhopal.ac.in</a>
+        </div>
+      </div>
+      <div class="contact-card glass-card contact-general" data-scroll="fade-up" data-delay="200">
+        <div class="contact-avatar">B²</div>
+        <div class="contact-info">
+          <h4>General Queries</h4>
+          <span>Bit by Bit Club · Official</span>
+          <a href="mailto:bitbybitclub@vitbhopal.ac.in">✉️ bitbybitclub@vitbhopal.ac.in</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo-mark">B²</span>
+      <span class="logo-text">BitHack <em>'26</em></span>
+    </div>
+    <p class="footer-copy">© 2026 <strong>Bit by Bit Club</strong> · VIT Bhopal University · All rights reserved.</p>
+    <p class="footer-built">Built with ⚡ by the Bit by Bit Club Tech Team</p>
+  </div>
+</footer>
+
+<!-- Firebase SDKs -->
+<script type="module" src="js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js"></script>
+</body>
+</html>

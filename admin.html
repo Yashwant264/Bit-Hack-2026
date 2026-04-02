@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — BitHack '26</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body { min-height: 100vh; }
+    .admin-header-bar {
+      background: linear-gradient(135deg, rgba(108,71,255,0.1), rgba(0,245,160,0.05));
+      border: 1px solid rgba(108,71,255,0.15);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .admin-header-bar h2 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+    .admin-header-bar p {
+      font-size: 0.85rem;
+      color: var(--text-3);
+      font-family: var(--font-mono);
+      margin-top: 4px;
+    }
+    .admin-stats-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .admin-stat-card {
+      flex: 1;
+      min-width: 150px;
+      background: var(--bg-glass);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      text-align: center;
+    }
+    .admin-stat-card .s-num {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #6c47ff, #00f5a0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .admin-stat-card .s-label {
+      font-size: 0.72rem;
+      color: var(--text-3);
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .refresh-btn {
+      background: rgba(108,71,255,0.1);
+      border: 1px solid rgba(108,71,255,0.2);
+      color: var(--primary-2);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      padding: 10px 20px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .refresh-btn:hover { background: rgba(108,71,255,0.2); }
+  </style>
+</head>
+<script src="js/script.js"></script>
+<body class="admin-body">
+
+<!-- LOGIN SCREEN -->
+<div class="admin-login-wrap" id="adminLoginWrap">
+  <div class="admin-login-card glass-card">
+    <div class="logo-mark" style="width:52px;height:52px;font-size:1.3rem;margin:0 auto 20px;border-radius:14px;background:linear-gradient(135deg,#6c47ff,#00f5a0);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;color:#fff;">B²</div>
+    <h2>Admin Access</h2>
+    <p>BitHack '26 · Bit by Bit Club</p>
+    <div class="form-group">
+      <label for="adminPass">Password</label>
+      <input type="password" id="adminPass" placeholder="Enter admin password" onkeydown="if(event.key==='Enter') adminLogin()" />
+    </div>
+    <p class="admin-login-error" id="loginError">Incorrect password. Please try again.</p>
+    <button class="btn-primary" onclick="adminLogin()" style="width:100%;justify-content:center;">
+      Access Dashboard
+    </button>
+  </div>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div class="admin-wrap" id="adminWrap">
+
+  <!-- NAV -->
+  <nav class="admin-nav">
+    <div class="admin-nav-brand">
+      <div class="logo-mark" style="width:36px;height:36px;font-size:0.9rem;background:linear-gradient(135deg,#6c47ff,#00d4ff);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;color:#fff;border-radius:10px;">B²</div>
+      <div>
+        <h1>BitHack '26 Admin</h1>
+      </div>
+    </div>
+    <div class="admin-nav-actions">
+      <span class="admin-stat-badge" id="navTeamCount">Loading...</span>
+      <a href="index.html" class="nav-admin" style="font-size:0.82rem;padding:8px 14px;border-radius:100px;border:1px solid var(--border);">← Public Site</a>
+      <button class="btn-logout" onclick="adminLogout()">Logout</button>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="admin-main">
+
+    <!-- HEADER BAR -->
+    <div class="admin-header-bar">
+      <div>
+        <h2>Team Registrations</h2>
+        <p>VIT Bhopal · April 3–4, 2026 · Bit by Bit Club</p>
+      </div>
+      <button class="refresh-btn" onclick="loadTeams()">↻ Refresh Data</button>
+    </div>
+
+    <!-- STATS -->
+    <div class="admin-stats-row" id="adminStats" style="display:none">
+      <div class="admin-stat-card">
+        <span class="s-num" id="statTotal">0</span>
+        <span class="s-label">Total Teams</span>
+      </div>
+      <div class="admin-stat-card">
+        <span class="s-num" id="statMembers">0</span>
+        <span class="s-label">Total Members</span>
+      </div>
+      <div class="admin-stat-card">
+        <span class="s-num" id="statAvgSize">0</span>
+        <span class="s-label">Avg Team Size</span>
+      </div>
+      <div class="admin-stat-card">
+        <span class="s-num" id="statTopDomain">—</span>
+        <span class="s-label">Top Domain</span>
+      </div>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="admin-search-bar">
+      <input type="text" id="adminSearch" class="admin-search-input"
+        placeholder="🔍  Search by team name, college, domain, or member name..."
+        oninput="filterTeams()" />
+    </div>
+
+    <!-- TEAMS GRID -->
+    <div class="admin-loading" id="adminLoading">
+      <div class="loading-dots"><span></span><span></span><span></span></div>
+      <p>Fetching registrations from Firebase...</p>
+    </div>
+
+    <div class="admin-teams-grid" id="adminTeamsGrid" style="display:none"></div>
+
+  </main>
+</div>
+
+<!-- Firebase SDKs -->
+<script type="module">
+  import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore, collection, getDocs, query, orderBy }
+    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  // ── FIREBASE CONFIG ────────────────────────────────────
+  const firebaseConfig = {
+    apiKey:            "YOUR_API_KEY",
+    authDomain:        "YOUR_DOMAIN",
+    projectId:         "YOUR_PROJECT_ID",
+    storageBucket:     "YOUR_STORAGE_BUCKET",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId:             "YOUR_APP_ID"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+
+  // ── STATE ──────────────────────────────────────────────
+  let allTeams = [];
+
+  // ── AUTH ───────────────────────────────────────────────
+  window.adminLogin = function() {
+    const pass = document.getElementById("adminPass").value;
+    if (pass === "admin123") {
+      document.getElementById("adminLoginWrap").style.display = "none";
+      document.getElementById("adminWrap").style.display      = "block";
+      loadTeams();
+    } else {
+      document.getElementById("loginError").style.display = "block";
+      document.getElementById("adminPass").value = "";
+      document.getElementById("adminPass").focus();
+    }
+  };
+
+  window.adminLogout = function() {
+    document.getElementById("adminLoginWrap").style.display = "flex";
+    document.getElementById("adminWrap").style.display      = "none";
+    document.getElementById("adminPass").value = "";
+    allTeams = [];
+  };
+
+  // ── LOAD TEAMS ─────────────────────────────────────────
+  window.loadTeams = async function() {
+    const grid    = document.getElementById("adminTeamsGrid");
+    const loading = document.getElementById("adminLoading");
+    const stats   = document.getElementById("adminStats");
+
+    grid.style.display  = "none";
+    stats.style.display = "none";
+    loading.style.display = "flex";
+    grid.innerHTML = "";
+
+    try {
+      const q = query(collection(db, "registrations"), orderBy("createdAt", "desc"));
+      const snapshot = await getDocs(q);
+      allTeams = [];
+      snapshot.forEach(doc => {
+        allTeams.push({ id: doc.id, ...doc.data() });
+      });
+    } catch (err) {
+      loading.style.display = "none";
+      grid.style.display    = "grid";
+      grid.innerHTML = `
+        <div class="admin-empty" style="grid-column:1/-1">
+          <div class="admin-empty-icon">⚠️</div>
+          <h3>Firebase Error</h3>
+          <p style="color:var(--text-3);font-size:0.85rem;margin-top:8px;">
+            ${err.message}<br/><br/>
+            Make sure you've replaced the Firebase config in both <code>index.html</code> and <code>admin.html</code>,
+            and that Firestore is enabled in your Firebase project.
+          </p>
+        </div>`;
+      return;
+    }
+
+    updateStats(allTeams);
+    renderTeams(allTeams);
+    loading.style.display = "none";
+    grid.style.display    = "grid";
+    stats.style.display   = "flex";
+  };
+
+  function updateStats(teams) {
+    const total   = teams.length;
+    const members = teams.reduce((a, t) => a + (t.teamSize || (t.members?.length) || 0), 0);
+    const avg     = total > 0 ? (members / total).toFixed(1) : "0";
+
+    // Top domain
+    const domainCount = {};
+    teams.forEach(t => { if (t.domain) domainCount[t.domain] = (domainCount[t.domain] || 0) + 1; });
+    const topDomain = Object.keys(domainCount).sort((a,b) => domainCount[b]-domainCount[a])[0] || "—";
+
+    document.getElementById("statTotal").textContent     = total;
+    document.getElementById("statMembers").textContent   = members;
+    document.getElementById("statAvgSize").textContent   = avg;
+    document.getElementById("statTopDomain").textContent = topDomain || "—";
+    document.getElementById("statTopDomain").style.fontSize = "1rem";
+
+    document.getElementById("navTeamCount").textContent = total + " Teams Registered";
+  }
+
+  function renderTeams(teams) {
+    const grid = document.getElementById("adminTeamsGrid");
+    grid.innerHTML = "";
+
+    if (teams.length === 0) {
+      grid.innerHTML = `
+        <div class="admin-empty">
+          <div class="admin-empty-icon">🔍</div>
+          <h3>No teams found</h3>
+          <p style="color:var(--text-3);font-size:0.85rem;margin-top:8px;">Try a different search term.</p>
+        </div>`;
+      return;
+    }
+
+    teams.forEach(team => {
+      const card = document.createElement("div");
+      card.className = "admin-team-card glass-card";
+
+      // Format date
+      let dateStr = "—";
+      if (team.createdAt?.toDate) {
+        const d = team.createdAt.toDate();
+        dateStr = d.toLocaleString("en-IN", {
+          day: "2-digit", month: "short", year: "numeric",
+          hour: "2-digit", minute: "2-digit"
+        });
+      }
+
+      const members = team.members || [];
+      const membersHTML = members.map(m => `
+        <div class="admin-member-row">
+          <div class="admin-member-avatar">${(m.name || "?").charAt(0).toUpperCase()}</div>
+          <div class="admin-member-info">
+            <div class="admin-member-name">${escHtml(m.name || "—")}</div>
+            <div class="admin-member-regno">${escHtml(m.regNo || "—")} · ${escHtml(m.email || "—")}</div>
+          </div>
+        </div>`).join("");
+
+      card.innerHTML = `
+        <div class="admin-team-header">
+          <div>
+            <div class="admin-team-name">${escHtml(team.teamName || "Unnamed Team")}</div>
+            <div class="admin-team-college">${escHtml(team.collegeName || "—")}</div>
+            ${team.domain ? `<span class="admin-domain-badge">${escHtml(team.domain)}</span>` : ""}
+          </div>
+          <span class="admin-team-size">${team.teamSize || members.length || "?"} members</span>
+        </div>
+        <div class="admin-team-meta">
+          <div class="admin-meta-row">
+            <span class="admin-meta-label">Email</span>
+            <span>${escHtml(team.collegeEmail || "—")}</span>
+          </div>
+          <div class="admin-meta-row">
+            <span class="admin-meta-label">Contact</span>
+            <span>${escHtml(team.contact || "—")}</span>
+          </div>
+        </div>
+        ${members.length > 0 ? `
+          <div class="admin-members-title">Team Members</div>
+          ${membersHTML}
+        ` : ""}
+        <div class="admin-team-date">Registered: ${dateStr}</div>`;
+
+      grid.appendChild(card);
+    });
+  }
+
+  window.filterTeams = function() {
+    const q = document.getElementById("adminSearch").value.toLowerCase().trim();
+    if (!q) { renderTeams(allTeams); return; }
+    const filtered = allTeams.filter(t => {
+      const searchable = [
+        t.teamName, t.collegeName, t.collegeEmail, t.contact, t.domain,
+        ...(t.members || []).flatMap(m => [m.name, m.regNo, m.email])
+      ].filter(Boolean).join(" ").toLowerCase();
+      return searchable.includes(q);
+    });
+    renderTeams(filtered);
+  };
+
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  // Allow Enter key in password field
+  document.getElementById("adminPass")?.addEventListener("keydown", e => {
+    if (e.key === "Enter") window.adminLogin();
+  });
+</script>
+</body>
+</html>
