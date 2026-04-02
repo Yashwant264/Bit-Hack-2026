@@ -437,7 +437,7 @@ body:not(:hover) .cursor-follower { opacity: 0; }
 }
 
 .hero-title {
-  font-family: inherit;
+  font-family: var(--font-display);
   font-size: clamp(40px, 8vw, 120px);
   font-weight: 800;
   line-height: 0.95;
@@ -1994,7 +1994,7 @@ section {
   transform: none !important;
 }
 .hero h1 {
-  font-family: inherit; 
+  font-family: var(--font-display); 
   display: block;
   text-align: center !important;
   margin-left: auto !important;
