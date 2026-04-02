@@ -364,5 +364,81 @@
     if (e.key === "Enter") window.adminLogin();
   });
 </script>
+<script type="module">
+
+// 🔥 Import Firebase
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// 🔑 YOUR CONFIG (same as index.html)
+const firebaseConfig = {
+  apiKey: "AIzaSyDkBRbDVm-avfc75LGM3kvcDg9JDpS19fs",
+  authDomain: "bithack-2026.firebaseapp.com",
+  projectId: "bithack-2026",
+  storageBucket: "bithack-2026.firebasestorage.app",
+  messagingSenderId: "125905800324",
+  appId: "1:125905800324:web:eec0aae1e3e7b94e24c6d1"
+};
+
+// Initialize
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Store all teams
+let allTeams = [];
+
+// 📥 Fetch data
+async function loadTeams() {
+  const querySnapshot = await getDocs(collection(db, "registrations"));
+
+  allTeams = [];
+
+  querySnapshot.forEach((doc) => {
+    allTeams.push(doc.data());
+  });
+
+  displayTeams(allTeams);
+}
+
+// 🧾 Display data
+function displayTeams(teams) {
+  const container = document.getElementById("teamsContainer");
+  container.innerHTML = "";
+
+  teams.forEach(team => {
+    let membersHTML = "";
+
+    team.members.forEach(m => {
+      membersHTML += `<li>${m.name} (${m.regNo})</li>`;
+    });
+
+    container.innerHTML += `
+      <div class="card">
+        <h3>${team.teamName}</h3>
+        <p><b>College:</b> ${team.collegeName}</p>
+        <p><b>Email:</b> ${team.collegeEmail}</p>
+        <p><b>Contact:</b> ${team.contact}</p>
+        <p><b>Team Size:</b> ${team.teamSize}</p>
+        <ul>${membersHTML}</ul>
+      </div>
+    `;
+  });
+}
+
+// 🔍 Search filter
+window.filterTeams = function() {
+  const search = document.getElementById("search").value.toLowerCase();
+
+  const filtered = allTeams.filter(team =>
+    team.teamName.toLowerCase().includes(search)
+  );
+
+  displayTeams(filtered);
+};
+
+// 🚀 Load data on page load
+loadTeams();
+
+</script>  
 </body>
 </html>
