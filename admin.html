@@ -366,11 +366,25 @@
 </script>
 <script type="module">
 
-// 🔥 Import Firebase
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+</head>
+<body>
+
+<h1>Admin Dashboard</h1>
+
+<input type="text" id="search" placeholder="Search Team..." onkeyup="filterTeams()"><br><br>
+
+<div id="teamsContainer"></div>
+
+<script type="module">
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// 🔑 YOUR CONFIG (same as index.html)
+// 🔑 SAME CONFIG
 const firebaseConfig = {
   apiKey: "AIzaSyDkBRbDVm-avfc75LGM3kvcDg9JDpS19fs",
   authDomain: "bithack-2026.firebaseapp.com",
@@ -380,40 +394,45 @@ const firebaseConfig = {
   appId: "1:125905800324:web:eec0aae1e3e7b94e24c6d1"
 };
 
-// Initialize
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Store all teams
 let allTeams = [];
 
-// 📥 Fetch data
+// 🔐 Simple Password
+const password = prompt("Enter Admin Password");
+if (password !== "admin123") {
+  document.body.innerHTML = "Access Denied";
+}
+
+// 📥 Fetch Data
 async function loadTeams() {
-  const querySnapshot = await getDocs(collection(db, "registrations"));
+  const snapshot = await getDocs(collection(db, "registrations"));
 
   allTeams = [];
 
-  querySnapshot.forEach((doc) => {
+  snapshot.forEach(doc => {
     allTeams.push(doc.data());
   });
 
   displayTeams(allTeams);
 }
 
-// 🧾 Display data
+// 🧾 Display
 function displayTeams(teams) {
   const container = document.getElementById("teamsContainer");
   container.innerHTML = "";
 
   teams.forEach(team => {
+
     let membersHTML = "";
 
-    team.members.forEach(m => {
+    (team.members || []).forEach(m => {
       membersHTML += `<li>${m.name} (${m.regNo})</li>`;
     });
 
     container.innerHTML += `
-      <div class="card">
+      <div style="border:1px solid #ccc; padding:10px; margin:10px;">
         <h3>${team.teamName}</h3>
         <p><b>College:</b> ${team.collegeName}</p>
         <p><b>Email:</b> ${team.collegeEmail}</p>
@@ -425,7 +444,7 @@ function displayTeams(teams) {
   });
 }
 
-// 🔍 Search filter
+// 🔍 Search
 window.filterTeams = function() {
   const search = document.getElementById("search").value.toLowerCase();
 
@@ -436,9 +455,13 @@ window.filterTeams = function() {
   displayTeams(filtered);
 };
 
-// 🚀 Load data on page load
+// 🚀 Load Data
 loadTeams();
 
+</script>
+
+</body>
+</html>
 </script>  
 </body>
 </html>
