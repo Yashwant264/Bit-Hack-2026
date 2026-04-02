@@ -2042,3 +2042,14 @@ section {
   overflow: visible;
   white-space: nowrap;
 }
+.hero-container {
+    padding-top: 100px; /* Adjust this value to clear your header */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.club-name {
+    margin-bottom: 20px; /* Space between club name and BIT HACK */
+    /* Remove any 'position: absolute' if it was there before */
+}
