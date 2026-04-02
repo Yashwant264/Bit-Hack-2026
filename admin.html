@@ -177,14 +177,14 @@
     from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
   // ── FIREBASE CONFIG ────────────────────────────────────
-  const firebaseConfig = {
-    apiKey:            "YOUR_API_KEY",
-    authDomain:        "YOUR_DOMAIN",
-    projectId:         "YOUR_PROJECT_ID",
-    storageBucket:     "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId:             "YOUR_APP_ID"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyDkBRbDVm-avfc75LGM3kvcDg9JDpS19fs",
+  authDomain: "bithack-2026.firebaseapp.com",
+  projectId: "bithack-2026",
+  storageBucket: "bithack-2026.firebasestorage.app",
+  messagingSenderId: "125905800324",
+  appId: "1:125905800324:web:eec0aae1e3e7b94e24c6d1"
+};
 
   const app = initializeApp(firebaseConfig);
   const db  = getFirestore(app);
@@ -381,10 +381,12 @@
 
 <script type="module">
 
+// 🔥 Firebase Imports
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-// 🔑 SAME CONFIG
+// 🔑 CONFIG (same as index.html)
 const firebaseConfig = {
   apiKey: "AIzaSyDkBRbDVm-avfc75LGM3kvcDg9JDpS19fs",
   authDomain: "bithack-2026.firebaseapp.com",
@@ -394,40 +396,40 @@ const firebaseConfig = {
   appId: "1:125905800324:web:eec0aae1e3e7b94e24c6d1"
 };
 
+// Init
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
-let allTeams = [];
+// 🔐 LOGIN
+window.login = async function() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-// 🔐 Simple Password
-const password = prompt("Enter Admin Password");
-if (password !== "admin123") {
-  document.body.innerHTML = "Access Denied";
-}
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (err) {
+    alert("❌ Login Failed");
+    console.error(err);
+  }
+};
 
-// 📥 Fetch Data
+// 🔓 LOGOUT
+window.logout = function() {
+  signOut(auth);
+};
+
+// 📥 LOAD DATA
 async function loadTeams() {
   const snapshot = await getDocs(collection(db, "registrations"));
 
-  allTeams = [];
-
-  snapshot.forEach(doc => {
-    allTeams.push(doc.data());
-  });
-
-  displayTeams(allTeams);
-  loadTeams();
-}
-
-// 🧾 Display
-function displayTeams(teams) {
   const container = document.getElementById("teamsContainer");
   container.innerHTML = "";
 
-  teams.forEach(team => {
+  snapshot.forEach(doc => {
+    const team = doc.data();
 
     let membersHTML = "";
-
     (team.members || []).forEach(m => {
       membersHTML += `<li>${m.name} (${m.regNo})</li>`;
     });
@@ -435,32 +437,46 @@ function displayTeams(teams) {
     container.innerHTML += `
       <div style="border:1px solid #ccc; padding:10px; margin:10px;">
         <h3>${team.teamName}</h3>
-        <p><b>College:</b> ${team.collegeName}</p>
-        <p><b>Email:</b> ${team.collegeEmail}</p>
-        <p><b>Contact:</b> ${team.contact}</p>
-        <p><b>Team Size:</b> ${team.teamSize}</p>
+        <p>${team.collegeName}</p>
+        <p>${team.collegeEmail}</p>
+        <p>${team.contact}</p>
         <ul>${membersHTML}</ul>
       </div>
     `;
   });
 }
 
-// 🔍 Search
-window.filterTeams = function() {
-  const search = document.getElementById("search").value.toLowerCase();
+// 🔥 THIS IS THE MOST IMPORTANT PART
+onAuthStateChanged(auth, user => {
+  if (user) {
+    console.log("✅ Logged in:", user.email);
 
-  const filtered = allTeams.filter(team =>
-    team.teamName.toLowerCase().includes(search)
-  );
+    document.getElementById("loginBox").style.display = "none";
+    document.getElementById("adminPanel").style.display = "block";
 
-  displayTeams(filtered);
-};
+    loadTeams();   // 🔥 DATA LOADS ONLY AFTER LOGIN
 
-// 🚀 Load Data
+  } else {
+    console.log("❌ Not logged in");
 
+    document.getElementById("loginBox").style.display = "block";
+    document.getElementById("adminPanel").style.display = "none";
+  }
+});
 
 </script>
+<div id="loginBox">
+  <h2>Admin Login</h2>
+  <input id="email" placeholder="Email"><br><br>
+  <input id="password" type="password" placeholder="Password"><br><br>
+  <button onclick="login()">Login</button>
+</div>
 
+<div id="adminPanel" style="display:none;">
+  <h1>Admin Dashboard</h1>
+  <button onclick="logout()">Logout</button>
+  <div id="teamsContainer"></div>
+</div>
 </body>
 </html>
 </script>  
