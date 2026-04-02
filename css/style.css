@@ -469,6 +469,7 @@ body:not(:hover) .cursor-follower { opacity: 0; }
 
 .hero-tagline {
   font-size: clamp(1rem, 2vw, 1.2rem);
+  font-family:var(--font-display); 
   color: var(--text-2);
   max-width: 100%;
   margin: 0 auto 40px;
