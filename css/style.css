@@ -350,6 +350,7 @@ body:not(:hover) .cursor-follower { opacity: 0; }
   align-items: center;   /
   justify-content: center;
   text-align: center;
+  font-family: var(--font-display); 
 }
 
 .hero-bg {
@@ -422,6 +423,7 @@ body:not(:hover) .cursor-follower { opacity: 0; }
   color: var(--primary-2);
   letter-spacing: 0.05em;
   margin-bottom: 28px;
+  font-family: var(--font-display); 
 }
 
 .badge-dot {
@@ -437,7 +439,7 @@ body:not(:hover) .cursor-follower { opacity: 0; }
 }
 
 .hero-title {
-  font-family: inherit;
+  font-family: var(--font-display);
   font-size: clamp(40px, 8vw, 120px);
   font-weight: 800;
   line-height: 0.95;
@@ -465,11 +467,12 @@ body:not(:hover) .cursor-follower { opacity: 0; }
   display: block;
   text-align: center;
   margin-top: 10px;
+  font-family: var(--font-display);
 }
 
 .hero-tagline {
   font-size: clamp(1rem, 2vw, 1.2rem);
-  font-family:inherit; 
+  font-family: var(--font-display); 
   color: var(--text-2);
   max-width: 100%;
   margin: 0 auto 40px;
@@ -480,6 +483,7 @@ body:not(:hover) .cursor-follower { opacity: 0; }
   color: var(--text);
   font-style: normal;
   font-weight: 500;
+  font-family: var(--font-display); 
 }
 
 .hero-meta {
@@ -493,6 +497,7 @@ body:not(:hover) .cursor-follower { opacity: 0; }
   margin: 0 auto 40px;
   max-width: 100%;
   backdrop-filter: blur(20px);
+   
 }
 
 .meta-item {
@@ -1995,7 +2000,7 @@ section {
   transform: none !important;
 }
 .hero h1 {
-  font-family: inherit; 
+  font-family: var(--font-display); 
   display: block;
   text-align: center !important;
   margin-left: auto !important;
@@ -2007,17 +2012,20 @@ section {
   align-items: center;   /
   justify-content: center;
   text-align: center;
+  font-family: var(--font-display); 
   width: 100%;
 }
 
 .hero-title h1 {
   font-size: clamp(40px, 8vw, 120px);
+  font-family: var(--font-display); 
   margin: 0;
   text-align: center;
 }
 
 .hero-title .year {
   font-size: 40px;
+  font-family: var(--font-display); 
   margin-top: 10px;
 }
 .hero {
@@ -2063,6 +2071,7 @@ section {
   color: #7cf9c8;
   font-size: 14px;
   text-align: center;
+  font-family: var(--font-display); 
 }
 /* FIX badge position */
 .hero-badge {
@@ -2074,19 +2083,21 @@ section {
   /* keep original glow feel */
   background: rgba(0, 255, 150, 0.08);
   border: 1px solid rgba(0, 255, 150, 0.3);
-
+  font-family: var(--font-display);
   font-size: 14px;
 }
 
 /* DO NOT TOUCH ORIGINAL TITLE SIZE */
 .hero-title {
-  font-size: clamp(80px, 10vw, 160px); /* restore big size */
+  font-size: clamp(80px, 10vw, 160px);
+  font-family: var(--font-display); /* restore big size */
   font-weight: 800;
 }
 
 /* FIX 26 alignment WITHOUT breaking style */
 .year {
   font-size: clamp(30px, 4vw, 60px);
+  font-family: var(--font-display); 
   margin-top: 10px;
 }
 .hero-badge {
