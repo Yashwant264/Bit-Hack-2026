@@ -9,12 +9,12 @@ import { getFirestore, collection, addDoc, serverTimestamp }
 
 // ── FIREBASE CONFIG ────────────────────────────────────────
 const firebaseConfig = {
-  apiKey:            "YOUR_API_KEY",
-  authDomain:        "YOUR_DOMAIN",
-  projectId:         "YOUR_PROJECT_ID",
-  storageBucket:     "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId:             "YOUR_APP_ID"
+  apiKey: "AIzaSyDkBRbDVm-avfc75LGM3kvcDg9JDpS19fs",
+  authDomain: "bithack-2026.firebaseapp.com",
+  projectId: "bithack-2026",
+  storageBucket: "bithack-2026.firebasestorage.app",
+  messagingSenderId: "125905800324",
+  appId: "1:125905800324:web:eec0aae1e3e7b94e24c6d1"
 };
 
 const app = initializeApp(firebaseConfig);
