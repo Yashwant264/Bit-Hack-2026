@@ -448,6 +448,7 @@ async function loadTeams() {
 
 // 🔥 THIS IS THE MOST IMPORTANT PART
 onAuthStateChanged(auth, user => {
+  console.log("User:",user);
   if (user) {
     console.log("✅ Logged in:", user.email);
 
