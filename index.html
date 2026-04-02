@@ -700,11 +700,40 @@
 
 <script type="module">
 
-// 🔥 Import Firebase
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bit Hack 2026</title>
+</head>
+<body>
+
+<h1>Register Team</h1>
+
+<form id="registerForm" onsubmit="submitForm(event)">
+  <input id="teamName" placeholder="Team Name" required><br><br>
+  <input id="collegeName" placeholder="College Name" required><br><br>
+  <input id="collegeEmail" placeholder="College Email" required><br><br>
+  <input id="contact" placeholder="Contact Number" required><br><br>
+
+  <select id="teamSize" onchange="generateMembers()" required>
+    <option value="">Select Team Size</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+  </select>
+
+  <div id="membersContainer"></div><br>
+
+  <button type="submit">Register</button>
+</form>
+
+<script type="module">
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// 🔑 YOUR CONFIG
+// 🔑 REPLACE THIS
 const firebaseConfig = {
   apiKey: "AIzaSyDkBRbDVm-avfc75LGM3kvcDg9JDpS19fs",
   authDomain: "bithack-2026.firebaseapp.com",
@@ -714,13 +743,28 @@ const firebaseConfig = {
   appId: "1:125905800324:web:eec0aae1e3e7b94e24c6d1"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// 🚀 FORM SUBMIT FUNCTION
-window.submitForm = async function(event) {
-  event.preventDefault();
+// 👥 Generate Members
+window.generateMembers = function() {
+  const size = document.getElementById("teamSize").value;
+  const container = document.getElementById("membersContainer");
+  container.innerHTML = "";
+
+  for (let i = 1; i <= size; i++) {
+    container.innerHTML += `
+      <h4>Member ${i}</h4>
+      <input id="memberName${i}" placeholder="Name" required><br>
+      <input id="memberReg${i}" placeholder="Registration No" required><br>
+      <input id="memberEmail${i}" placeholder="Email" required><br><br>
+    `;
+  }
+};
+
+// 🚀 Submit Form
+window.submitForm = async function(e) {
+  e.preventDefault();
 
   const teamSize = document.getElementById("teamSize").value;
 
@@ -744,20 +788,17 @@ window.submitForm = async function(event) {
     createdAt: new Date()
   };
 
-  try {
-    await addDoc(collection(db, "registrations"), data);
+  await addDoc(collection(db, "registrations"), data);
 
-    alert("✅ Registration Successful!");
-
-    document.getElementById("registerForm").reset();
-    document.getElementById("membersContainer").innerHTML = "";
-
-  } catch (error) {
-    alert("❌ Error submitting form");
-    console.error(error);
-  }
+  alert("✅ Registered Successfully!");
+  document.getElementById("registerForm").reset();
+  document.getElementById("membersContainer").innerHTML = "";
 };
 
+</script>
+
+</body>
+</html>
 </script>
 </body>
 </html>
