@@ -2099,7 +2099,7 @@ section {
 .year {
   font-size: clamp(40px, 8vw, 120px);
   font-family: var(--font-display); 
-  margin-top: 5px;
+  margin-top: 0px;
   font-size: clamp(60px, 6vw, 100px);  /* 🔥 bigger */
   font-weight: 800;
 }
