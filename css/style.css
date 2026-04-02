@@ -413,8 +413,9 @@ body:not(:hover) .cursor-follower { opacity: 0; }
 }
 
 .hero-badge {
-  display: inline-flex; align-items: center; gap: 8px;
+  display: inline-block; align-items: center; gap: 8px;
   background: rgba(108,71,255,0.12);
+  position:relative; 
   border: 1px solid rgba(108,71,255,0.3);
   border-radius: 100px;
   padding: 8px 18px;
@@ -422,7 +423,7 @@ body:not(:hover) .cursor-follower { opacity: 0; }
   font-weight: 500;
   color: var(--primary-2);
   letter-spacing: 0.05em;
-  margin-bottom: 28px;
+  margin-bottom: 10px;
   font-family: var(--font-display); 
 }
 
@@ -2098,7 +2099,9 @@ section {
 .year {
   font-size: clamp(40px, 8vw, 120px);
   font-family: var(--font-display); 
-  margin-top: 10px;
+  margin-top: 5px;
+  font-size: clamp(60px, 6vw, 100px);  /* 🔥 bigger */
+  font-weight: 800;
 }
 .hero-badge {
   animation: fadeInUp 1s ease forwards;
@@ -2118,4 +2121,7 @@ section {
 }
 .hero {
   text-align: center;
+}
+.hero {
+  margin-top: 80px;   /* adjust if needed */
 }
