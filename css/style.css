@@ -2049,7 +2049,6 @@ section {
 .hero h1 {
   max-width: 100%;
   overflow: visible;
-  white-space: nowrap;
 }
 .hero-container {
     padding-top: 100px; /* Adjust this value to clear your header */
@@ -2124,4 +2123,23 @@ section {
 }
 .hero {
   margin-top: 80px;   /* adjust if needed */
+}
+@media (max-width: 768px) {
+
+  .hero-title {
+    font-size: clamp(50px, 12vw, 90px);  /* smaller only on mobile */
+    white-space: normal;   /* 🔥 allow wrapping */
+    word-break: break-word;
+    text-align: center;
+  }
+
+  .year {
+    font-size: clamp(40px, 8vw, 70px);  /* adjust 26 size */
+    margin-top: 5px;
+  }
+
+  body {
+    overflow-x: hidden;  /* stop page shifting */
+  }
+
 }
