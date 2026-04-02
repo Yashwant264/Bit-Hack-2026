@@ -411,7 +411,7 @@ body:not(:hover) .cursor-follower { opacity: 0; }
 .hero-content {
   position: relative; z-index: 1;
   text-align: center;
-  max-width: 900px;
+  max-width: 100%;
 }
 
 .hero-badge {
@@ -441,7 +441,7 @@ body:not(:hover) .cursor-follower { opacity: 0; }
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(4rem, 14vw, 10rem);
+  font-size: clamp(40px, 8vw, 120px);
   font-weight: 800;
   line-height: 0.95;
   letter-spacing: -0.04em;
@@ -473,7 +473,7 @@ body:not(:hover) .cursor-follower { opacity: 0; }
 .hero-tagline {
   font-size: clamp(1rem, 2vw, 1.2rem);
   color: var(--text-2);
-  max-width: 560px;
+  max-width: 100%;
   margin: 0 auto 40px;
   line-height: 1.7;
 }
@@ -493,7 +493,7 @@ body:not(:hover) .cursor-follower { opacity: 0; }
   border-radius: var(--radius);
   padding: 20px 32px;
   margin: 0 auto 40px;
-  max-width: 700px;
+  max-width: 100%;
   backdrop-filter: blur(20px);
 }
 
@@ -1630,12 +1630,12 @@ body:not(:hover) .cursor-follower { opacity: 0; }
 /* ── SCROLL ANIMATIONS ────────────────────────────────────── */
 [data-scroll] {
   opacity: 0;
-  transform: translateY(30px);
+  transform: none;
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
 [data-scroll="fade-left"] {
-  transform: translateX(40px);
+  transform: none;
 }
 
 [data-scroll].visible {
@@ -1995,4 +1995,10 @@ section {
 }
 section {
   transform: none !important;
+}
+.hero h1 {
+  display: block;
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
