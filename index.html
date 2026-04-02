@@ -698,11 +698,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/SplitText.min.js"></script>
 <script type="module">
 
+<script type="module">
+
 // 🔥 Import Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// 🔑 YOUR CONFIG (same as index.html)
+// 🔑 YOUR CONFIG
 const firebaseConfig = {
   apiKey: "AIzaSyDkBRbDVm-avfc75LGM3kvcDg9JDpS19fs",
   authDomain: "bithack-2026.firebaseapp.com",
@@ -712,65 +714,50 @@ const firebaseConfig = {
   appId: "1:125905800324:web:eec0aae1e3e7b94e24c6d1"
 };
 
-// Initialize
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Store all teams
-let allTeams = [];
+// 🚀 FORM SUBMIT FUNCTION
+window.submitForm = async function(event) {
+  event.preventDefault();
 
-// 📥 Fetch data
-async function loadTeams() {
-  const querySnapshot = await getDocs(collection(db, "registrations"));
+  const teamSize = document.getElementById("teamSize").value;
 
-  allTeams = [];
+  let members = [];
 
-  querySnapshot.forEach((doc) => {
-    allTeams.push(doc.data());
-  });
-
-  displayTeams(allTeams);
-}
-
-// 🧾 Display data
-function displayTeams(teams) {
-  const container = document.getElementById("teamsContainer");
-  container.innerHTML = "";
-
-  teams.forEach(team => {
-    let membersHTML = "";
-
-    team.members.forEach(m => {
-      membersHTML += `<li>${m.name} (${m.regNo})</li>`;
+  for (let i = 1; i <= teamSize; i++) {
+    members.push({
+      name: document.getElementById(`memberName${i}`).value,
+      regNo: document.getElementById(`memberReg${i}`).value,
+      email: document.getElementById(`memberEmail${i}`).value
     });
+  }
 
-    container.innerHTML += `
-      <div class="card">
-        <h3>${team.teamName}</h3>
-        <p><b>College:</b> ${team.collegeName}</p>
-        <p><b>Email:</b> ${team.collegeEmail}</p>
-        <p><b>Contact:</b> ${team.contact}</p>
-        <p><b>Team Size:</b> ${team.teamSize}</p>
-        <ul>${membersHTML}</ul>
-      </div>
-    `;
-  });
-}
+  const data = {
+    teamName: document.getElementById("teamName").value,
+    collegeName: document.getElementById("collegeName").value,
+    collegeEmail: document.getElementById("collegeEmail").value,
+    contact: document.getElementById("contact").value,
+    teamSize,
+    members,
+    createdAt: new Date()
+  };
 
-// 🔍 Search filter
-window.filterTeams = function() {
-  const search = document.getElementById("search").value.toLowerCase();
+  try {
+    await addDoc(collection(db, "registrations"), data);
 
-  const filtered = allTeams.filter(team =>
-    team.teamName.toLowerCase().includes(search)
-  );
+    alert("✅ Registration Successful!");
 
-  displayTeams(filtered);
+    document.getElementById("registerForm").reset();
+    document.getElementById("membersContainer").innerHTML = "";
+
+  } catch (error) {
+    alert("❌ Error submitting form");
+    console.error(error);
+  }
 };
 
-// 🚀 Load data on page load
-loadTeams();
-
-</script>  
+</script>
 </body>
 </html>
