@@ -2128,7 +2128,7 @@ section {
 
   .hero-title {
     font-size: clamp(50px, 12vw, 90px);  /* smaller only on mobile */
-    white-space: normal;   /* 🔥 allow wrapping */
+    white-space: normal;   /* wrapping */
     word-break: break-word;
     text-align: center;
   }
