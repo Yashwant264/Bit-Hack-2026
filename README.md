@@ -58,6 +58,9 @@ bithack-26/
 ## Live Link
 - **Website is live at:**   https://bit-hack-2026.vercel.app
 
+
+---
+
 ## Firebase Setup
 
 1. Create a project at [console.firebase.google.com](https://console.firebase.google.com) and enable Firestore
