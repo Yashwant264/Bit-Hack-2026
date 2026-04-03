@@ -255,7 +255,7 @@ window.addEventListener("load", () => {
 // ── COUNTDOWN TIMER ───────────────────────────────────────
 function initCountdown() {
 
-  const targetDate = new Date("2026-04-10T23:59:59").getTime(); // 🔥 change date if needed
+  const targetDate = new Date("2026-04-10T23:59:59").getTime(); // Date Change
 
   function updateTimer() {
     const now = new Date().getTime();
