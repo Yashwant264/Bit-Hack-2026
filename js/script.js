@@ -584,3 +584,10 @@ console.log(`%c
 `, "color: #6c47ff; font-family: monospace;");
 
 initCountdown();
+
+gsap.fromTo("select", {
+  opacity: 0,
+  y: 30,
+  duration: 1,
+  stagger: 0.2
+});
